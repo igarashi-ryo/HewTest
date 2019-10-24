@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraChange : MonoBehaviour
+{
+    //　メインカメラ（三人称視点）
+    [SerializeField] private GameObject mainCamera;
+    //　切り替える他のカメラ(一人称視点)
+    [SerializeField] private GameObject otherCamera;
+
+    private void Start()
+    {
+        mainCamera.SetActive(true);     //メインカメラを使用する
+        otherCamera.SetActive(false);   //サブカメラを使用しない
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        //　1キーを押したらカメラの切り替えをする
+        if (Input.GetKeyDown("1"))
+        {
+            mainCamera.SetActive(!mainCamera.activeSelf);
+            otherCamera.SetActive(!otherCamera.activeSelf);
+        }
+    }
+}
