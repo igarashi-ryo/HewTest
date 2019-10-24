@@ -9,19 +9,25 @@ public class CameraChange : MonoBehaviour
     //　切り替える他のカメラ(一人称視点)
     [SerializeField] private GameObject otherCamera;
 
+    public GameObject Target;       //飛ばす対象
+    Vector3 beforePos;              //飛ばす前の座標
+    bool Throw = false;             //飛ばしたかどうか
+
     private void Start()
     {
         mainCamera.SetActive(true);     //メインカメラを使用する
         otherCamera.SetActive(false);   //サブカメラを使用しない
+        beforePos = Target.transform.position;  //前座標に値の代入
     }
     // Update is called once per frame
     void Update()
     {
-        //　1キーを押したらカメラの切り替えをする
-        if (Input.GetKeyDown("1"))
+        //　一定値以上進んだら、カメラを切り替える
+        if ((Target.transform.position.z >= beforePos.z + 30)&&(Throw == false))
         {
             mainCamera.SetActive(!mainCamera.activeSelf);
             otherCamera.SetActive(!otherCamera.activeSelf);
+            Throw = true;
         }
     }
 }
